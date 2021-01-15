@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 // });
 
 
+Route::apiResource('comments', CommentVideoController::class);
+
 // groupe de route pour l'authentification
 Route::group([
     'prefix' => 'auth'
@@ -224,4 +226,7 @@ Route::group([
         Route::post('creer-video','VideoController@ajouterVideos');
         Route::post('supprimer-video','VideoController@supprimerVideo');
     });
+
+
+    
 });
