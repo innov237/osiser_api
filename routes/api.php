@@ -52,7 +52,7 @@ Route::group([
     Route::get('listeCategorieParent', 'CategorieController@listeCategorieParent');
     // Produit
     Route::get('listeProduit', 'ProduitController@listeproduit');
-    Route::patch('produit/{produit}', 'ProduitController@update');
+    Route::middleware('auth.admin')->patch('produit/{produit}',  'ProduitController@update');
     Route::get('rechercherProduit', 'ProduitController@rechercherProduit');
     Route::get('produitParCategorie', 'ProduitController@produitParCategories');
     // commentaire produit
