@@ -25,4 +25,10 @@ class TypeAbonnerController extends Controller
 
         return response()->json($liste);
     }
+
+    public function update(Request $request) {
+        $liste = typeAbonner::all();
+
+        return response()->json($liste);
+    }
 }

@@ -195,10 +195,14 @@ Route::group([
     
     Route::get('liste-categorie', 'CategorieSujetController@listCategorie');
     Route::get('liste-sujet-categorie', 'SujetController@listSujetCategorie');
+    
     Route::group([
         // 'middleware' => 'auth:api'
     ], function () {
         Route::get('type-abonnement', 'TypeAbonnerController@listType');
+
+        Route::middleware('auth.admin')->post('status/',  'ProduitController@update');
+
         Route::get('list-discussion-sujet', 'DiscussionController@listDiscussionSujet');
         Route::post('creer-categorie','CategorieSujetController@createCategorie');
         Route::post('supprimer-categorie','CategorieSujetController@supprimerCategorie');
