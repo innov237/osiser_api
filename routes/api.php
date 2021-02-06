@@ -33,7 +33,7 @@ Route::group([
     ], function() {
         Route::get('filtrelisteclient', 'Auth\AuthController@filtrelisteclient');
         Route::get('logout', 'Auth\AuthController@logout');
-        Route::get('user', 'Auth\AuthController@user');
+        Route::middleware('auth:api')->get('user', 'Auth\AuthController@user');
         Route::get('menbre', 'Auth\AuthController@menbre');
         Route::get('client', 'Auth\AuthController@client');
         Route::get('livreur', 'Auth\AuthController@livreur');
@@ -52,7 +52,7 @@ Route::group([
     Route::get('listeCategorieParent', 'CategorieController@listeCategorieParent');
     // Produit
     Route::get('listeProduit', 'ProduitController@listeproduit');
-    Route::middleware('auth.admin')->post('produit/{produit}',  'ProduitController@update');
+    Route::middleware(['auth.admin'])->post('produit/{produit}',  'ProduitController@update');
     Route::get('rechercherProduit', 'ProduitController@rechercherProduit');
     Route::get('produitParCategorie', 'ProduitController@produitParCategories');
     // commentaire produit
@@ -201,7 +201,7 @@ Route::group([
     ], function () {
         Route::get('type-abonnement', 'TypeAbonnerController@listType');
 
-        Route::middleware('auth.admin')->post('type-abonnement/',  'TypeAbonnerController@update');
+        Route::middleware(['auth.admin'])->post('type-abonnement/',  'TypeAbonnerController@update');
 
         Route::get('list-discussion-sujet', 'DiscussionController@listDiscussionSujet');
         Route::post('creer-categorie','CategorieSujetController@createCategorie');
