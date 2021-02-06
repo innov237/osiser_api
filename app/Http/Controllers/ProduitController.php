@@ -366,4 +366,17 @@ class ProduitController extends Controller
                 ->update(['is_promo'=>false]);
         return response()->json(array('message' => 'mise en vente flash','success'=>true));
     }
+
+    public function update(Request $request, $id){
+        //
+        $request->validate([
+            'reduction' => 'required'
+        ]);
+
+        $produit = produit::findOrFail($id);
+
+        $produit->update($request->only(['reduction']));
+
+        return response()->json(array('success' => true), 200);
+    }
 }

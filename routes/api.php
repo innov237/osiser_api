@@ -52,6 +52,7 @@ Route::group([
     Route::get('listeCategorieParent', 'CategorieController@listeCategorieParent');
     // Produit
     Route::get('listeProduit', 'ProduitController@listeproduit');
+    Route::patch('produit/{produit}', 'ProduitController@update');
     Route::get('rechercherProduit', 'ProduitController@rechercherProduit');
     Route::get('produitParCategorie', 'ProduitController@produitParCategories');
     // commentaire produit
@@ -229,4 +230,12 @@ Route::group([
 
 
     
+});
+
+
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'Route not found. Contact Administrator',
+        'success' => false
+    ],404);
 });
