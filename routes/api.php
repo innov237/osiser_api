@@ -227,15 +227,15 @@ Route::group([
         Route::post('creer-video','VideoController@ajouterVideos');
         Route::post('supprimer-video','VideoController@supprimerVideo');
     });
-
-
-    
 });
 
 
+
+
 Route::fallback(function(){
-    return response()->json([
+    return response()->json(
+    [
         'message' => 'Route not found. Contact Administrator',
         'success' => false
-    ],404);
+],404);
 });
