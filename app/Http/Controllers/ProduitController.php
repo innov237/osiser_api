@@ -7,6 +7,9 @@ use App\historiqueStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Validator;
+use Illuminate\Validation\Rule;
+
 class ProduitController extends Controller
 {
     
@@ -369,14 +372,34 @@ class ProduitController extends Controller
 
     public function update(Request $request, $id){
         //
-        $request->validate([
-            'reduction' => 'required'
+
+        $credentials = Validator::make($request->all(),[
+            'reduction' => 'required|numeric'
         ]);
 
-        $produit = produit::findOrFail($id);
+        if ($credentials->fails()) {
+            return response()->json(
+                array(
+                    'success'=>false,
+                    'message' => 'UNPROCESS',
+                    'detail'=>$credentials->errors()
+                ),422
+            );
+        }
 
-        $produit->update($request->only(['reduction']));
+        $produit = produit::find($id);
 
-        return response()->json(array('success' => true), 200);
+        if ($produit){
+            $produit->update($request->only(['reduction']));
+            return response()->json(array('success' => true), 200);
+        }
+        return response()->json(
+                array(
+                    'success'=>false,
+                    'message' => 'NOT FOUND',
+                    'detail'=> "Not found boutique with id ".$id
+                ),404
+            );
+
     }
 }

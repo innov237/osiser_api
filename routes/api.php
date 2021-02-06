@@ -52,7 +52,7 @@ Route::group([
     Route::get('listeCategorieParent', 'CategorieController@listeCategorieParent');
     // Produit
     Route::get('listeProduit', 'ProduitController@listeproduit');
-    Route::middleware('auth.admin')->patch('produit/{produit}',  'ProduitController@update');
+    Route::middleware('auth.admin')->post('produit/{produit}',  'ProduitController@update');
     Route::get('rechercherProduit', 'ProduitController@rechercherProduit');
     Route::get('produitParCategorie', 'ProduitController@produitParCategories');
     // commentaire produit
@@ -201,7 +201,7 @@ Route::group([
     ], function () {
         Route::get('type-abonnement', 'TypeAbonnerController@listType');
 
-        Route::middleware('auth.admin')->post('status/',  'ProduitController@update');
+        Route::middleware('auth.admin')->post('type-abonnement/',  'TypeAbonnerController@update');
 
         Route::get('list-discussion-sujet', 'DiscussionController@listDiscussionSujet');
         Route::post('creer-categorie','CategorieSujetController@createCategorie');
@@ -218,6 +218,9 @@ Route::group([
         Route::post('regeter-abonnement','AbonnerController@rejetAbonnement');
     });
 });
+
+
+
 
 Route::group([
     'prefix' => 'video'

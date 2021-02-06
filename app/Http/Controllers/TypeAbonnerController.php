@@ -27,8 +27,11 @@ class TypeAbonnerController extends Controller
     }
 
     public function update(Request $request) {
-        $liste = typeAbonner::all();
+        $request->validate([
+            'type' => 'required|string',
+            'user_id' => 'required'
+        ]);
 
-        return response()->json($liste);
+        return response()->json([]);
     }
 }
